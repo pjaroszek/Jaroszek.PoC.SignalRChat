@@ -1,5 +1,6 @@
 namespace Jaroszek.PoC.SignalRChat.Infrastructure.Chat.CommandHandlers
 {
+    using System;
     using System.Threading;
     using System.Threading.Tasks;
     using Jaroszek.PoC.SignalRChat.Application.Chat.Commands;
