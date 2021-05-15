@@ -6,6 +6,7 @@ namespace Jaroszek.PoC.SignalRChat.WebUI
     using Jaroszek.PoC.SignalRChat.Application;
     using Jaroszek.PoC.SignalRChat.Infrastructure;
     using Jaroszek.PoC.SignalRChat.WebUI.Hubs;
+    using Jaroszek.PoC.SignalRChat.WebUI.Jobs;
     using MediatR;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -36,6 +37,8 @@ namespace Jaroszek.PoC.SignalRChat.WebUI
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddApplication();
             services.AddInfrastructure();
+
+            services.AddSingleton<ISendDelayMessage, SendDelayMessage>();
 
             services.AddControllers();
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Jaroszek.PoC.SignalRChat.WebUI", Version = "v1" }));
