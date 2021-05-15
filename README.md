@@ -20,7 +20,7 @@ To fully verify the solution you need to run the server and all clients.
 
 Server part has tests, which are placed in tests directory, to run them go to directory:
 ```
-server tests
+server/tests
 ```
 and issue a command from the command line:
 ```
@@ -29,11 +29,9 @@ dotnet test
 
 To start the server, go to the location from the command line:
 ```
-srcJaroszek.PoC.SignalRChat.WebUI
+src/Jaroszek.PoC.SignalRChat.WebUI
 ```
 and issue the command 
 ```
 dotnet run
 ```
-
-Translated with www.DeepL.com/Translator (free version)
