@@ -252,7 +252,9 @@
     </Compile>
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Events\ChangeStatusRequestEvent.cs" />
+    <Compile Include="Events\ConnectedToSignalRServerRequestEvent.cs" />
     <Compile Include="Events\ConnectToSignalRClientEvent.cs" />
+    <Compile Include="Events\DisconnectedToSignalRServerRequestEven.cs" />
     <Compile Include="Events\DisconnectSignalRServerRequestEvent.cs" />
     <Compile Include="Events\ReceivedMessageSignalRResponse.cs" />
     <Compile Include="Events\SendMessageSignalRServerRequestEvent.cs" />

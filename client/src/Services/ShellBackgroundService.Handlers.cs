@@ -25,6 +25,7 @@
               });
                 connection.StartAsync();
                 this.eventAggregator.GetEvent<ChangeStatusRequestEvent>().Publish("Connected");
+                this.eventAggregator.GetEvent<ConnectedToSignalRServerRequestEvent>().Publish();
             }
             catch (Exception exception)
             {
@@ -56,6 +57,7 @@
             {
                 connection.StopAsync();
                 this.eventAggregator.GetEvent<ChangeStatusRequestEvent>().Publish("Disconnected");
+                this.eventAggregator.GetEvent<DisconnectedToSignalRServerRequestEven>().Publish();
             }
 
 

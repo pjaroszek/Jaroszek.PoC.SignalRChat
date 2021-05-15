@@ -37,6 +37,22 @@
                 this.Status = s;
             });
 
+            this.eventAgregator.GetEvent<ConnectedToSignalRServerRequestEvent>().Subscribe(() =>
+            {
+                this.IsVisibilityConnected = false;
+                this.IsConnectToSignalR = true;
+                this.IsDisconnectToSignalR = false;
+                this.IsVisibilityDisconnected = true;
+            });
+
+            this.eventAgregator.GetEvent<DisconnectedToSignalRServerRequestEven>().Subscribe(() =>
+            {
+                this.IsVisibilityConnected = true;
+                this.IsConnectToSignalR = false;
+                this.IsDisconnectToSignalR = true;
+                this.IsVisibilityDisconnected = false;
+            });
+
             this.logger.LogInformation($"Created {typeof(ShellViewModel)} object.");
 
         }

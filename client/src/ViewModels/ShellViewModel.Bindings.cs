@@ -7,6 +7,10 @@
         private string status = "Disconnected";
         private string title = "SignalR Client";
         private string message;
+        private bool isVisibilityConnected = true;
+        private bool isConnectToSignalR = false;
+        private bool isDisconnectToSignalR = false;
+        private bool isVisibilityDisconnected = true;
 
         private ObservableCollection<string> messagesReceived = new ObservableCollection<string>();
 
@@ -30,6 +34,32 @@
             {
                 this.SetProperty(ref this.message, value);
             }
+        }
+
+        public bool IsVisibilityConnected
+        {
+            get => this.isVisibilityConnected;
+            set => this.SetProperty(ref this.isVisibilityConnected, value);
+        }
+
+
+        public bool IsVisibilityDisconnected
+        {
+            get => this.isVisibilityDisconnected;
+            set => this.SetProperty(ref this.isVisibilityDisconnected, value);
+        }
+
+
+        public bool IsConnectToSignalR
+        {
+            get => this.isConnectToSignalR;
+            set => this.SetProperty(ref this.isConnectToSignalR, value);
+        }
+
+        public bool IsDisconnectToSignalR
+        {
+            get => this.isDisconnectToSignalR;
+            set => this.SetProperty(ref this.isDisconnectToSignalR, value);
         }
 
         public ObservableCollection<string> MessagesReceived
