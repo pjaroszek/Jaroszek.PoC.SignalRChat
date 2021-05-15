@@ -47,18 +47,6 @@ namespace Jaroszek.PoC.SignalRChat.IntegrationTests
         }
 
         [TestMethod]
-        public async Task ApiControllerTest()
-        {
-            //Arrange
-
-            //Act
-            var response = await this.client.GetStringAsync("/Api");
-
-            //Assert
-            response.Should().NotBeNullOrWhiteSpace();
-        }
-
-        [TestMethod]
         public async Task WeatherForecastControllerEndpointNotFoundTest()
         {
             //Arrange
