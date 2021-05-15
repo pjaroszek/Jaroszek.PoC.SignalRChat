@@ -40,7 +40,6 @@
                 Padding="2"
                 IsEnabled="{Binding IsVisibilityDisconnected, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                 Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
             <StackPanel Orientation="Horizontal">
                 <Button
                     Width="288"
@@ -60,15 +59,12 @@
                     Command="{Binding DisconnectCommand, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                     Content="{DynamicResource Disconnect}"
                     IsEnabled="{Binding IsVisibilityDisconnected, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-
             </StackPanel>
             <ListView
                 MinHeight="180"
                 Margin="5"
                 ItemsSource="{Binding MessagesReceived, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
-
-
         <StatusBar Grid.Row="1" Grid.Column="0">
             <StatusBarItem HorizontalAlignment="Left">
                 <Grid>
@@ -111,7 +107,5 @@
                 </Grid>
             </StatusBarItem>
         </StatusBar>
-
-
     </Grid>
 </Window>
