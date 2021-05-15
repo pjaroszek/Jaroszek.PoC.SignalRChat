@@ -26,10 +26,10 @@ namespace Jaroszek.PoC.SignalRChat.Domain.Entities
             AddDate = addDate;
         }
 
-        public Guid MessageId { get; set; }
-        public string UserName { get; set; }
-        public string Message { get; set; }
-        public DateTime AddDate { get; set; }
-        public bool IsActive { get; set; } = true;
+        public Guid MessageId { get; }
+        public string UserName { get; }
+        public string Message { get; }
+        public DateTime AddDate { get; }
+        public bool IsActive { get; } = true;
     }
 }
