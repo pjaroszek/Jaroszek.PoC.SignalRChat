@@ -1,19 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-
 namespace Jaroszek.PoC.SignalRChat.WebUI
 {
+    using System.Reflection;
+    using Hangfire;
+    using Hangfire.MemoryStorage;
+    using Jaroszek.PoC.SignalRChat.Application;
+    using Jaroszek.PoC.SignalRChat.Infrastructure;
+    using Jaroszek.PoC.SignalRChat.WebUI.Hubs;
+    using MediatR;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.OpenApi.Models;
+    using Serilog;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -23,28 +24,54 @@ namespace Jaroszek.PoC.SignalRChat.WebUI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLogging(configure => configure.AddSerilog());
+            services.AddHealthChecks();
+
+            GlobalConfiguration.Configuration.UseSerilogLogProvider();
+
+            services.AddHangfire(config => config.UseMemoryStorage());
+
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddApplication();
+            services.AddInfrastructure();
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Jaroszek.PoC.SignalRChat.WebUI", Version = "v1" });
-            });
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Jaroszek.PoC.SignalRChat.WebUI", Version = "v1" }));
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    }));
+
+
+            services.AddSignalR();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseHangfireDashboard();
+            app.UseHangfireServer();
+
+            app.UseCors("MyPolicy");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Jaroszek.PoC.SignalRChat.WebUI v1"));
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Jaroszek.PoC.SignalRChat.WebUI v1"));
+
             app.UseHttpsRedirection();
+
+            app.UseHealthChecks("/health");
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -52,7 +79,10 @@ namespace Jaroszek.PoC.SignalRChat.WebUI
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
         }
     }
