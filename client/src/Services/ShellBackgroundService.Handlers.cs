@@ -55,7 +55,7 @@
             if (connection != null)
             {
                 connection.StopAsync();
-                this.eventAggregator.GetEvent<ChangeStatusRequestEvent>().Publish("Disconnect");
+                this.eventAggregator.GetEvent<ChangeStatusRequestEvent>().Publish("Disconnected");
             }
 
 
