@@ -246,7 +246,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Events\ConnectToSignalRClientEvent.cs" />
+    <Compile Include="Events\DisconnectSignalRServerRequestEvent.cs" />
     <Compile Include="Interfaces\IBackgroundService.cs" />
+    <Compile Include="Models\ChatMessage.cs" />
     <Compile Include="Services\ShellBackgroundService.cs" />
     <Compile Include="ViewModels\ShellViewModel.Behaviors.cs" />
     <Compile Include="ViewModels\ShellViewModel.Bindings.cs" />
@@ -285,9 +288,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Events\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

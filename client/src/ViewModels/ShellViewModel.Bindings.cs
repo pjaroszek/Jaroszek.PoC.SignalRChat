@@ -1,6 +1,41 @@
 ﻿namespace Jaroszek.PoC.SignalRChat.Client.ViewModels
 {
+    using System.Collections.ObjectModel;
+
     public sealed partial class ShellViewModel
     {
+        private string status = "Disconnected";
+        private string title = "SignalR Client";
+        private string message;
+
+        private ObservableCollection<string> messagesReceived = new ObservableCollection<string>();
+
+
+        public string Status
+        {
+            get => this.status;
+            set => this.SetProperty(ref this.status, value);
+        }
+
+        public string Title
+        {
+            get => this.title;
+            set => this.SetProperty(ref this.title, value);
+        }
+
+        public string Message
+        {
+            get => this.message;
+            set
+            {
+                this.SetProperty(ref this.message, value);
+            }
+        }
+
+        public ObservableCollection<string> MessagesReceived
+        {
+            get => this.messagesReceived;
+            set => this.SetProperty(ref this.messagesReceived, value);
+        }
     }
 }
