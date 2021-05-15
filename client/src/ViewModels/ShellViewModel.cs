@@ -1,5 +1,7 @@
 ﻿namespace Jaroszek.PoC.SignalRChat.Client.ViewModels
 {
+    using Jaroszek.PoC.SignalRChat.Client.Events;
+
     using Microsoft.Extensions.Logging;
 
     using Prism.Events;
@@ -24,6 +26,16 @@
             this.eventAgregator = eventAgregator;
             this.logger = loggeFactory.CreateLogger<ShellViewModel>();
 
+            this.eventAgregator.GetEvent<ReceivedMessageSignalRResponse>().Subscribe(item =>
+            {
+                App.Current.Dispatcher.Invoke((Action)delegate { this.MessagesReceived.Add(item.UserName + " says " + item.Message); });
+            });
+
+
+            this.eventAgregator.GetEvent<ChangeStatusRequestEvent>().Subscribe(s =>
+            {
+                this.Status = s;
+            });
 
             this.logger.LogInformation($"Created {typeof(ShellViewModel)} object.");
 

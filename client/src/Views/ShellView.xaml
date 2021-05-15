@@ -10,8 +10,8 @@
     xmlns:mvvm="http://prismlibrary.com/"
     xmlns:viewModels1="clr-namespace:Jaroszek.PoC.SignalRChat.Client.ViewModels"
     Title="{Binding Title, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-    Width="800"
-    Height="450"
+    Width="600"
+    Height="350"
     d:DataContext="{d:DesignInstance viewModels1:ShellViewModel,
                                      IsDesignTimeCreatable=True}"
     md:DialogServiceViews.IsRegistered="True"
@@ -26,5 +26,30 @@
         </i:EventTrigger>
     </b:Interaction.Triggers>
 
-    <Grid />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+
+
+        </Grid>
+        <StatusBar Grid.Row="3" Grid.Column="0">
+            <StatusBarItem HorizontalAlignment="Left">
+                <Label Padding="0" Content="{Binding Status, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StatusBarItem>
+
+        </StatusBar>
+
+
+    </Grid>
 </Window>

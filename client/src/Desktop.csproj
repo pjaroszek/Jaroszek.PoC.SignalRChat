@@ -246,11 +246,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Events\ChangeStatusRequestEvent.cs" />
     <Compile Include="Events\ConnectToSignalRClientEvent.cs" />
     <Compile Include="Events\DisconnectSignalRServerRequestEvent.cs" />
+    <Compile Include="Events\ReceivedMessageSignalRResponse.cs" />
+    <Compile Include="Events\SendMessageSignalRServerRequestEvent.cs" />
     <Compile Include="Interfaces\IBackgroundService.cs" />
     <Compile Include="Models\ChatMessage.cs" />
     <Compile Include="Services\ShellBackgroundService.cs" />
+    <Compile Include="Services\ShellBackgroundService.Handlers.cs" />
     <Compile Include="ViewModels\ShellViewModel.Behaviors.cs" />
     <Compile Include="ViewModels\ShellViewModel.Bindings.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
